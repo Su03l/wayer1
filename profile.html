@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الملف الشخصي - مكتب العدالة</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/loader.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <i class="fas fa-balance-scale"></i>
+                    <span>مكتب العدالة</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">الرئيسية</a>
+                </li>
+                <li class="nav-item">
+                    <a href="chatbot.html" class="nav-link">الشات بوت</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">تواصل معنا</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Profile Container -->
+    <div class="profile-container">
+        <div class="profile-sidebar">
+            <div class="sidebar-header">
+                <h3>إعدادات الحساب</h3>
+            </div>
+            <div class="sidebar-menu">
+                <div class="menu-item active" data-section="profile">
+                    <i class="fas fa-user"></i>
+                    <span>البيانات الشخصية</span>
+                </div>
+                <div class="menu-item" data-section="personal">
+                    <i class="fas fa-edit"></i>
+                    <span>تعديل الملف الشخصي</span>
+                </div>
+                <div class="menu-item" data-section="password">
+                    <i class="fas fa-key"></i>
+                    <span>تغيير كلمة المرور</span>
+                </div>
+                <div class="menu-item" data-section="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>إعدادات الحساب</span>
+                </div>
+                <div class="menu-item logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>تسجيل الخروج</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-main">
+            <div class="profile-card">
+                <div class="profile-content">
+                    <!-- الملف الشخصي -->
+                    <div class="profile-section active" id="profile-section">
+                        <div class="profile-avatar-circle">
+                            <img src="https://e7.pngegg.com/pngimages/906/222/png-clipart-computer-icons-user-profile-avatar-french-people-computer-network-heroes-thumbnail.png" alt="صورة المستخدم" id="userAvatar">
+                        </div>
+                        <h3>الملف الشخصي</h3>
+                        <div class="profile-view">
+                            <div class="profile-field">
+                                <label>الاسم الأول</label>
+                                <div class="field-value">أحمد</div>
+                            </div>
+                            <div class="profile-field">
+                                <label>الاسم الأخير</label>
+                                <div class="field-value">محمد</div>
+                            </div>
+                            <div class="profile-field">
+                                <label>البريد الإلكتروني</label>
+                                <div class="field-value">ahmed@example.com</div>
+                            </div>
+                            <div class="profile-field">
+                                <label>رقم الجوال</label>
+                                <div class="field-value" data-field="phone">+966 50 123 4567</div>
+                            </div>
+                            <div class="profile-field">
+                                <label>تاريخ الميلاد</label>
+                                <div class="field-value">01/01/1990</div>
+                            </div>
+                            <div class="profile-field">
+                                <label>الجنس</label>
+                                <div class="field-value">ذكر</div>
+                            </div>
+                            <div class="profile-field">
+                                <label>العنوان</label>
+                                <div class="field-value">الرياض، المملكة العربية السعودية</div>
+                            </div>
+                        </div>
+                        <div class="profile-actions">
+                            <button class="btn btn-primary" onclick="showSection('personal')">
+                                <i class="fas fa-edit"></i>
+                                تعديل البيانات الشخصية
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- تعديل الملف الشخصي -->
+                    <div class="profile-section" id="personal-section">
+                        <div class="edit-profile-header">
+                            <h3>تعديل الملف الشخصي</h3>
+                            <div class="edit-avatar-circle">
+                                <img src="https://e7.pngegg.com/pngimages/906/222/png-clipart-computer-icons-user-profile-avatar-french-people-computer-network-heroes-thumbnail.png" alt="صورة المستخدم" id="editUserAvatar">
+                            </div>
+                            <button class="btn btn-secondary avatar-select-btn" onclick="selectAvatar()">
+                                <i class="fas fa-camera"></i>
+                                اختيار صورة شخصية
+                            </button>
+                        </div>
+                        <form class="profile-form" id="profileForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>الاسم الأول</label>
+                                    <input type="text" id="firstName" value="أحمد" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>الاسم الأخير</label>
+                                    <input type="text" id="lastName" value="محمد" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>البريد الإلكتروني</label>
+                                    <input type="email" id="email" value="ahmed@example.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>رقم الجوال</label>
+                                    <input type="tel" id="phone" value="+966 50 123 4567" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>تاريخ الميلاد</label>
+                                    <input type="date" id="birthDate" value="1990-01-01">
+                                </div>
+                                <div class="form-group">
+                                    <label>الجنس</label>
+                                    <select id="gender">
+                                        <option value="male">ذكر</option>
+                                        <option value="female">أنثى</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>العنوان</label>
+                                <textarea id="address" rows="3" placeholder="أدخل عنوانك الكامل">الرياض، المملكة العربية السعودية</textarea>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i>
+                                    حفظ التغييرات
+                                </button>
+                                <button type="button" class="btn btn-secondary" onclick="resetForm()">
+                                    <i class="fas fa-undo"></i>
+                                    إعادة تعيين
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- تغيير كلمة المرور -->
+                    <div class="profile-section" id="password-section">
+                        <h3>تغيير كلمة المرور</h3>
+                        <form class="password-form" id="passwordForm">
+                            <div class="form-group">
+                                <label>كلمة المرور الحالية</label>
+                                <div class="password-input">
+                                    <input type="password" id="currentPassword" required>
+                                    <button type="button" class="password-toggle" onclick="togglePassword('currentPassword')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>كلمة المرور الجديدة</label>
+                                <div class="password-input">
+                                    <input type="password" id="newPassword" required>
+                                    <button type="button" class="password-toggle" onclick="togglePassword('newPassword')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>تأكيد كلمة المرور الجديدة</label>
+                                <div class="password-input">
+                                    <input type="password" id="confirmPassword" required>
+                                    <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-key"></i>
+                                    تغيير كلمة المرور
+                                </button>
+                                <button type="button" class="btn btn-secondary forgot-password-btn" onclick="forgotPassword()">
+                                    <i class="fas fa-question-circle"></i>
+                                    نسيت كلمة المرور؟
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- إعدادات الحساب -->
+                    <div class="profile-section" id="settings-section">
+                        <h3>إعدادات الحساب</h3>
+                        <div class="settings-list">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>الإشعارات</h4>
+                                    <p>استلام إشعارات عبر البريد الإلكتروني</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="emailNotifications" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>النشرة الإخبارية</h4>
+                                    <p>استلام آخر الأخبار والتحديثات</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="newsletter">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>الخصوصية</h4>
+                                    <p>إظهار معلوماتي للمستخدمين الآخرين</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="privacy">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="danger-zone">
+                            <h3>منطقة الخطر</h3>
+                            <div class="danger-actions">
+                                <div class="danger-item">
+                                    <div class="danger-info">
+                                        <h4>حذف الحساب</h4>
+                                        <p>حذف الحساب نهائياً مع جميع البيانات المرتبطة به</p>
+                                    </div>
+                                    <button class="btn btn-danger" onclick="deleteAccount()">
+                                        <i class="fas fa-trash"></i>
+                                        حذف الحساب
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Chat Button -->
+    <div class="back-to-chat">
+        <a href="chatbot.html" class="back-btn">
+            <i class="fas fa-arrow-right"></i>
+            العودة للشات بوت
+        </a>
+    </div>
+
+    <script src="js/profile.js"></script>
+    <script src="js/loader.js"></script>
+</body>
+</html> 

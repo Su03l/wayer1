@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تواصل معنا - مكتب العدالة</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .contact-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+        }
+
+        .contact-left {
+            flex: 1;
+            text-align: center;
+        }
+
+        .contact-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-header {
+            margin-bottom: 2rem;
+        }
+
+        .contact-header h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .contact-header p {
+            color: var(--light-text);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .contact-item.phone-dropdown,
+        .contact-item.email-dropdown {
+            z-index: 1000;
+        }
+
+        .contact-item:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-item.phone-dropdown:hover,
+        .contact-item.email-dropdown:hover {
+            z-index: 1001;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-details h3 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-details p {
+            color: var(--light-text);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .contact-trigger {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .contact-trigger::after {
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-right: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover .contact-trigger::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 9999;
+            margin-top: 0.5rem;
+        }
+
+        .contact-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f1f3f4;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: #f8f9fa;
+            color: var(--primary-color);
+        }
+
+        .dropdown-item i {
+            font-size: 0.9rem;
+            width: 16px;
+        }
+
+        .back-to-home {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .back-home-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            color: var(--primary-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-home-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .back-home-btn i {
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                padding: 1rem;
+            }
+
+            .contact-card {
+                padding: 2rem;
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .contact-left {
+                order: 2;
+            }
+
+            .contact-right {
+                order: 1;
+            }
+
+            .contact-header h1 {
+                font-size: 2rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .contact-item {
+                flex-direction: row;
+                text-align: left;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-balance-scale"></i>
+                <span>مكتب العدالة</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">الرئيسية</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#services" class="nav-link">الخدمات</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#about" class="nav-link">من نحن</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link active">تواصل معنا</a>
+                </li>
+                <li class="nav-item">
+                    <a href="login.html" class="nav-link login-btn">تسجيل دخول</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contact Section -->
+    <div class="contact-container">
+        <div class="contact-card">
+            <!-- Back to Home Button -->
+            <div class="back-to-home">
+                <a href="index.html" class="back-home-btn">
+                    <i class="fas fa-home"></i>
+                    العودة للرئيسية
+                </a>
+            </div>
+
+            <div class="contact-left">
+                <div class="contact-header">
+                    <h1>تواصل معنا</h1>
+                    <p>نحن هنا لمساعدتك في جميع استفساراتك القانونية. لا تتردد في التواصل معنا عبر أي من الطرق التالية</p>
+                </div>
+            </div>
+
+            <div class="contact-right">
+                <div class="contact-info">
+                    <div class="contact-item phone-dropdown">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>الهاتف</h3>
+                            <p class="contact-trigger" dir="ltr">+966 50 123 4567</p>
+                        </div>
+                        <div class="dropdown-menu">
+                            <a href="tel:+966501234567" class="dropdown-item">
+                                <i class="fas fa-phone"></i>
+                                اتصال
+                            </a>
+                            <a href="https://wa.me/966501234567" target="_blank" class="dropdown-item">
+                                <i class="fab fa-whatsapp"></i>
+                                واتس اب
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item email-dropdown">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>البريد الإلكتروني</h3>
+                            <p class="contact-trigger">info@justice-law.com</p>
+                        </div>
+                        <div class="dropdown-menu">
+                            <a href="mailto:info@justice-law.com" class="dropdown-item">
+                                <i class="fas fa-envelope"></i>
+                                إرسال رسالة
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>العنوان</h3>
+                            <p>الرياض، المملكة العربية السعودية</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }));
+    </script>
+</body>
+</html> 
